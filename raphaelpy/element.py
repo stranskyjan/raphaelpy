@@ -1,4 +1,4 @@
-from utils import SvgElement
+from utils import SvgElement,_parsePath
 
 class RaphaelElement(SvgElement):
 	id = -1
@@ -185,6 +185,7 @@ class Text(RaphaelElement):
 
 class Path(RaphaelElement):
 	def __init__(self,d="M0,0",id=None):
+		d = _parsePath(d)
 		RaphaelElement.__init__(self,d=d,id=id)
 		self.attrs["path"] = d
 	def _xmlTag(self):
