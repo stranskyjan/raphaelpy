@@ -270,6 +270,13 @@ def _addArrow(self,o,value,isEnd):
 	else:
 		o._markerStart = marker
 
+def _addClipRect(self,o,value):
+	from element import Rect
+	x,w,y,h = value
+	paper = o.paper
+	clipId = "clip-rect-{}".format(o.id)
+	clip = paper.clipPath(id=clipId)
+	clip.add(paper.rect(x,w,y,h))
 
 class SvgElement:
 	def __init__(self,id=None,**kw):
@@ -364,6 +371,10 @@ class SvgElement:
 		elif k == "stroke-dasharray":
 			w = self.attr("stroke-width")
 			v = ",".join(map(lambda _: str(w*_), _dasharrays.get(v,v)))
+		elif k == "clip-rect":
+			k = "clip-path"
+			self.paper._addClipRect(self,v)
+			v = "url(#clip-rect-{})".format(self.id)
 		elif k == "fill":
 			grad = _getGradient(v)
 			if isinstance(v,(str,unicode)) and v.startswith("url("):

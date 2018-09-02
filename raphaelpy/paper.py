@@ -1,5 +1,5 @@
 import codecs
-from utils import _addArrow
+from utils import _addArrow,_addClipRect
 from element import *
 from defs import *
 from set import *
@@ -55,6 +55,8 @@ class Paper(object):
 		self._defs = {}
 	def _addArrow(self,o,value,isEnd):
 		_addArrow(self,o,value,isEnd)
+	def _addClipRect(self,o,value):
+		_addClipRect(self,o,value)
 	def setSize(self,width,height):
 		self.width = width
 		self.height = height
