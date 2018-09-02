@@ -411,13 +411,13 @@ class SvgElement:
 		attrs.update(self._attrs)
 		attrs = dict((k,"none" if v is None else v) for k,v in attrs.iteritems())
 		ks = sorted(attrs.keys())
-		attrs = ['{}="{}"'.format(k,attrs[k]) for k in ks]
-		attrs = " ".join(attrs)
+		attrs = [u'{}="{}"'.format(k,attrs[k]) for k in ks]
+		attrs = u" ".join(attrs)
 		indent = indentN*indentChar
 		if not innerText and not self.children:
-			return '{}<{} {}/>\n'.format(indent,tag,attrs)
+			return u'{}<{} {}/>\n'.format(indent,tag,attrs)
 		if innerText:
-			return '{}<{} {}>{}</{}>\n'.format(indent,tag,attrs,innerText,tag)
+			return u'{}<{} {}>{}</{}>\n'.format(indent,tag,attrs,innerText,tag)
 		indent2 = (indentN+1)*indentChar
 		children = "".format(indent2).join(ch._toXmlString(indentN=indentN+1,indentChar=indentChar) for ch in self.children)
-		return '{}<{} {}>\n{}{}</{}>\n'.format(indent,tag,attrs,children,indent,tag)
+		return u'{}<{} {}>\n{}{}</{}>\n'.format(indent,tag,attrs,children,indent,tag)
