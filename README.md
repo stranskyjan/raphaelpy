@@ -57,7 +57,7 @@ See [examples](examples) directory for more examples.
 Are welcome.
 
 #### Bug reporting
-In case of any question or problem, please leave an issue at the [githup page of the project](https://github.com/stranskyjan/photo-calendar).
+In case of any question or problem, please leave an issue at the [githup page of the project](https://github.com/stranskyjan/raphaelpy).
 
 #### Contributors
 - [Jan Stránský](https://github.com/stranskyjan)
