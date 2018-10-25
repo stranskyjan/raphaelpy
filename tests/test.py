@@ -1,8 +1,6 @@
-import sys
 import os
 import unittest
 import tempfile
-sys.path.append(os.pardir)
 from raphaelpy import Paper,Rect,Circle,Text,Image,Path,Set
 
 tmp = tempfile.gettempdir()

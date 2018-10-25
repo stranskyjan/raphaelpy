@@ -3,3 +3,5 @@ docs/_build
 examples/*.svg
 examples/raphaeljs/*.svg
 build
+dist
+*.egg-info
