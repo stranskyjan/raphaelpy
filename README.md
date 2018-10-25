@@ -41,6 +41,10 @@ See [examples](examples) directory for more examples.
 
 	`make install [options]`, e.g. `make install USER=TRUE PYTHON=python3`
 
+3. Using [`pip`](https://pypi.org/project/pip/)
+
+	`[sudo] pip install [options] raphaelpy`, e.g. `pip install --user raphaelpy`
+
 ## What is here
 
 | directory | content |
