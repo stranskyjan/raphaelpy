@@ -181,6 +181,7 @@ class Text(RaphaelElement):
 			"fill": 'black',
 			"font-family": "Arial",
 			"text-anchor": "middle",
+			"font-size": 10,
 		}
 
 class Path(RaphaelElement):

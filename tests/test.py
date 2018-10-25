@@ -70,7 +70,9 @@ class TestPaper(unittest.TestCase):
 			'	<rect fill="white" fill-opacity="1" height="480" id="0" rx="0" ry="0" stroke="none" stroke-opacity="1" stroke-width="1" width="640" x="0" y="0"/>',
 			'	<rect fill="none" height="200" id="1" rx="0" ry="0" stroke="black" stroke-width="1" width="100" x="10" y="20"/>',
 			'	<circle cx="60" cy="70" fill="none" id="2" r="20" stroke="black" stroke-width="1"/>',
-			'	<text fill="black" font-family="Arial" id="3" stroke="none" text="abc" text-anchor="middle" x="150" y="160">abc</text>',
+			'	<text fill="black" font-family="Arial" font-size="10" id="3" stroke="none" text-anchor="middle" x="150" y="160">',
+			'		<tspan x="150" dy="2.75">abc</tspan>',
+			'	</text>',
 			'</svg>',
 		]
 		self.assertEqual(elines, olines)

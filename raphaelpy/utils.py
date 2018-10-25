@@ -407,18 +407,33 @@ class SvgElement(object):
 		self.attrs = self._attrs = {}
 	def _toXmlString(self,indentN=0,indentChar="\t"):
 		tag = self._xmlTag()
-		innerText = self._attrs.get("text","")
+		text = self._attrs.get("text","")
 		attrs = {} if self.id == None else dict(id=self.id)
 		attrs.update(self._attrs)
+		if "text" in attrs:
+			del attrs["text"]
 		attrs = dict((k,"none" if v is None else v) for k,v in attrs.items())
 		ks = sorted(attrs.keys())
 		attrs = [u'{}="{}"'.format(k,attrs[k]) for k in ks]
 		attrs = u" ".join(attrs)
 		indent = indentN*indentChar
-		if not innerText and not self.children:
+		if not text and not self.children:
 			return u'{}<{} {}/>\n'.format(indent,tag,attrs)
-		if innerText:
-			return u'{}<{} {}>{}</{}>\n'.format(indent,tag,attrs,innerText,tag)
+		if text:
+			fontSize = self._attrs["font-size"]
+			lines = text.split("\n")
+			n = len(lines)
+			dy0 = .275*fontSize - (n-1)*.6*fontSize
+			dy1 = 1.2*fontSize
+			indent1 = (indentN+1)*indentChar
+			lines2 = []
+			for i,line in enumerate(lines):
+				x = self._attrs["x"]
+				dy = dy0 if i==0 else dy1
+				line = '{}<tspan x="{}" dy="{}">{}</tspan>'.format(indent1,x,dy,line)
+				lines2.append(line)
+			lines = "\n".join(lines2)
+			return u'{indent}<text {attrs}>\n{lines}\n{indent}</text>\n'.format(indent=indent,attrs=attrs,lines=lines)
 		indent2 = (indentN+1)*indentChar
 		children = "".format(indent2).join(ch._toXmlString(indentN=indentN+1,indentChar=indentChar) for ch in self.children)
 		return u'{}<{} {}>\n{}{}</{}>\n'.format(indent,tag,attrs,children,indent,tag)
