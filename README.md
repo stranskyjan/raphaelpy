@@ -1,11 +1,16 @@
-### What is it?
-RaphaëlPy is a library for creating SVG drawings using Python.
+# [RaphaëlPy](https://github.com/stranskyjan/raphaelpy)
+A library for creating SVG drawings using Python.
+
+## Overview
 It's usage and most of the public API (and obviously it's name, too) is strongly inspired by [Raphaël JavaScript Library](http://dmitrybaranovskiy.github.io/raphael/).
 Some examples and some of the implementation details are borrowed from the original project, too.
 
 See [examples](examples) to examine how to it works and how to use it.
 
-### How to use it
+##### Compatibility
+The package works with both Python 2 and 3 (tested on [Ubuntu 18.04 LTS](https://www.ubuntu.com/) and Python 2.7.15 and Python 3.6.6).
+
+## Usage
 as simple as:
 ```python
 from raphaelpy import Raphael
@@ -27,11 +32,39 @@ paper.save()
 
 See [examples](examples) directory for more examples.
 
-### Project file structure
+## Installation
+1. Using `setup.py` file:
+
+	`python setup.py install [options]`, e.g. `python setup.py --user`
+
+2. Using `make` (calls `setup.py` internally):
+
+	`make install [options]`, e.g. `make install USER=TRUE PYTHON=python3`
+
+## What is here
 
 | directory | content |
 | --- | --- |
 | [raphaelpy](raphaelpy) | source code |
 | [examples](examples) | examples how RaphaëlPy works and how to use it |
+| [Makefile](Makefile) | makefile for the project (with targets `help`, `install`, `doc`, `test`, `clean`, `dist`) |
 | [docs](docs) | source codes to build HTML documentation |
 | [tests](tests) | a few unit tests |
+| [setup.py](setup.py) | python setup file for installation |
+
+## Contribution
+#### Pull Requests
+TODO
+
+#### Bug reporting
+In case of any question or problem, please leave an issue at the [githup page of the project](https://github.com/stranskyjan/photo-calendar).
+
+#### Contributors
+- [Jan Stránský](https://github.com/stranskyjan)
+
+
+## License
+This project is licensed under the LGPL License - see the [license file](LICENSE) for details.
+
+## Acknowledgements
+- to [Raphaël JavaScript Library](http://dmitrybaranovskiy.github.io/raphael/) for great job and inspiration.
