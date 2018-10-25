@@ -8,7 +8,7 @@ with open('README.md') as f:
 
 setuptools.setup(
 	name = 'raphaelpy',
-	version = 'version',
+	version = version,
 	description = 'Library for creating SVG drawings using Python, inspired by RaphaëlJS',
 	author = 'Jan Stransky',
 	author_email = 'honzik.stransky@gmail.com',
