@@ -6,8 +6,8 @@ Some examples and some of the implementation details are borrowed from the origi
 See examples to examine how to it works and how to use it.
 """
 
-from raphael import *
-from raphael import _Raphael # for the documentation purposes
+from .raphael import *
+from .raphael import _Raphael # for the documentation purposes
 
 null = "none"
 """for more JavaScript consistency"""

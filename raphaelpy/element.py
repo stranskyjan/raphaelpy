@@ -1,4 +1,4 @@
-from utils import SvgElement,_parsePath
+from .utils import SvgElement,_parsePath
 
 class RaphaelElement(SvgElement):
 	id = -1

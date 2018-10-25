@@ -79,7 +79,7 @@ r1.attr(stroke="blue")
 # dict {"key": value}
 r1.attr({"stroke-width": 10})
 # retrieve an attr value
-print r1.attr("fill")
+print(r1.attr("fill"))
 r2 = paper.rect(10,90,100,50)
 # multiple fields at once as kwargs. Note using underscore in stroke_width instead of stroke-width
 r2.attr(fill="red",stroke="blue",stroke_width=10)

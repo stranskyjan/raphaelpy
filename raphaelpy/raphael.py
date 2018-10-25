@@ -1,16 +1,16 @@
 from math import floor
-from paper import Paper
-from element import *
-from set import Set
-from utils import _packageRGB
+from .paper import Paper
+from .element import *
+from .set import Set
+from .utils import _packageRGB
 
-class _El:
+class _El(object):
 	pass
 
-class _Fn:
+class _Fn(object):
 	pass
 
-class _Raphael:
+class _Raphael(object):
 	"""Auxiliary class for initialization :class:`Paper` and custom functions and methods defined in :attr:`el <_Raphael.el>` and :attr:`fn <_Raphael.fn>`.
 	"""
 	el = _El()
@@ -88,9 +88,9 @@ class _Raphael:
 				},
 			])
 		"""
-		for k,v in self.el.__dict__.iteritems():
+		for k,v in self.el.__dict__.items():
 			setattr(RaphaelElement,k,v)
-		for k,v in self.fn.__dict__.iteritems():
+		for k,v in self.fn.__dict__.items():
 			setattr(Paper,k,v)
 		return Paper(fileName,*args,**kw)
 	@staticmethod

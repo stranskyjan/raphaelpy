@@ -1,18 +1,18 @@
 import codecs
-from utils import _addArrow,_addClipRect
-from element import *
-from defs import *
-from set import *
+from .utils import _addArrow,_addClipRect
+from .element import *
+from .defs import *
+from .set import *
 
 class Paper(object):
 	"""Paper class, used to create and manage :class:`Raphael element <RaphaelElement>` and to save final drawing.
-
+	
 	See :meth:`Raphael <_Raphael.__call__>` for possible arguments.
-
+	
 	forEach is not implemented, use
-
+	
 	.. code-block:: python
-
+	
 		for elem in paper:
 			...
 	
@@ -68,7 +68,7 @@ class Paper(object):
 			self.top.remove()
 	def getById(self,id):
 		"""Returns you element by its internal ID.
-
+		
 		:param int id: id
 		:return: Raphael element object or None
 		:rtype: RaphaelElement
@@ -178,7 +178,7 @@ class Paper(object):
 #
 	def rect(self,*args,**kw):
 		"""Draws a rectangle.
-
+		
 		:param number x: x coordinate of the top left corner
 		:param number y: y coordinate of the top left corner
 		:param number width: width
@@ -190,7 +190,7 @@ class Paper(object):
 		return self._create(Rect,*args,**kw)
 	def circle(self,*args,**kw):
 		"""Draws a circle
-
+		
 		:param number cx: x coordinate of the center
 		:param number cy: y coordinate of the center
 		:param number r: radius
@@ -210,7 +210,7 @@ class Paper(object):
 		return self._create(Text,*args,**kw)
 	def path(self,*args,**kw):
 		"""Creates a path element by given path data string.
-
+		
 		:param str|list d: SVG path string or corresponding list
 		:return: new Raphael element object of type "Path"
 		:rtype: RaphaelElement
@@ -218,7 +218,7 @@ class Paper(object):
 		return self._create(Path,*args,**kw)
 	def ellipse(self,*args,**kw):
 		"""Draws an ellipse
-
+		
 		:param number x: x coordinate of the center
 		:param number y: y coordinate of the center
 		:param number rx: horizontal radius
@@ -229,7 +229,7 @@ class Paper(object):
 		return self._create(Ellipse,*args,**kw)
 	def image(self,*args,**kw):
 		"""Embeds an image.
-
+		
 		:param str src: URI of the source image
 		:param number x: x coordinate position
 		:param number y: y coordinate position
@@ -247,12 +247,12 @@ class Paper(object):
 		return ret
 	def pattern(self,x,y,width,height,id=None,**kw):
 		"""Creates a SVG pattern, used e.g. as a hatching fill
-
+		
 		:param str id: unique id for reference
 		:return: new Pattern element
-
+		
 		.. code-block:: python
-
+		
 			w = h = 30
 			r = 4
 			pattern = paper.pattern(0,0,w,h,"dotted")
@@ -267,9 +267,9 @@ class Paper(object):
 		return self._addDef(Pattern(x,y,width,height,id=id,**kw))
 	def marker(self,refX,refY,markerWidth,markerHeight,id=None,**kw):
 		"""Creates a SVG marker, used e.g. as a line ending
-
+		
 		.. code-block:: python
-
+		
 			m1 = paper.marker(5,5,10,10,"end1",orient="auto")
 			m1.add(paper.rect(0,0,10,10).attr(fill='black'))
 			m2 = paper.marker(5,5,10,10,"start1",orient="10deg")
@@ -279,12 +279,12 @@ class Paper(object):
 		return self._addDef(Marker(refX,refY,markerWidth,markerHeight,id=id,**kw))
 	def clipPath(self,id=None):
 		"""Creates clip path to clip an element
-
+		
 		:param str id: unique id for reference
 		:return: new ClipPath element
-
+		
 		.. code-block:: python
-
+		
 			path = paper.path(["M",0,50,"h",100,"l",-50,50,"h",100,"l",-50,150,"h",-50,"Z"])
 			clip = paper.clipPath("clip1")
 			clip.add(paper.path().attr(path=path.attr("path")))
@@ -294,9 +294,9 @@ class Paper(object):
 #
 	def set(self,*elems):
 		"""Creates :class:`list-like object <Set>` to keep and operate several elements at once.
-
+		
 		.. code-block:: python
-
+		
 			st = paper.set()
 			st.push(
 				 paper.circle(10, 10, 5),
@@ -319,9 +319,11 @@ class _PaperIterator(object):
 	def __init__(self,paper):
 		self.paper = paper
 		self.current = paper.bottom
-	def next(self):
+	def __next__(self):
 		ret = self.current
 		if ret is None:
 			raise StopIteration
 		self.current = self.current.next
 		return ret
+	def next(self):
+		return self.__next__()

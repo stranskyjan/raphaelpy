@@ -13,7 +13,7 @@ def star(this,cx,cy,r,n=4):
 	r0 = .4*r
 	a,da = 0, pi/n
 	p = []
-	for i in xrange(n):
+	for i in range(n):
 		for rr in (r,r0):
 			x = cx + rr*sin(a)
 			y = cy - rr*cos(a)
@@ -24,7 +24,7 @@ def star(this,cx,cy,r,n=4):
 	return this.path(p)
 Raphael.fn.star = star
 
-paper = Raphael("1.svg",W,H)
+paper = Raphael("basics.svg",W,H)
 paper.rect(0,0,W,H).stroke(null).fill('white')
 paper.rect(10,20,100,200).stroke('red').fill('blue').thick()
 paper.circle().stroke('magenta').fill('cyan').attr(cx=300,cy=300,r=30).mediumThick()

@@ -1,11 +1,12 @@
 from math import pow,sqrt,cos,sin,radians,floor
+import six
 import re
 
 def _underscoreToMinus(w):
 	return w.replace("_","-")
 
 def _packageRGB(r, g, b, o):
-	from raphaelpy import Raphael
+	from .raphael import Raphael
 	r *= 255
 	g *= 255
 	b *= 255
@@ -44,13 +45,13 @@ _markers = dict(
 
 def _parsePath(v):
 	ret = v
-	if isinstance(v,(str,unicode)):
+	if isinstance(v,six.string_types):
 		pass
 	elif isinstance(v,(list,tuple)):
 		ret = "" + v[0]
 		prev = v[0]
 		for e in v[1:]:
-			if isinstance(e,(str,unicode)):
+			if isinstance(e,six.string_types):
 				ret += e
 			elif isinstance(e,(int,float)):
 				if isinstance(prev,(int,float)):
@@ -61,7 +62,7 @@ def _parsePath(v):
 			prev = e
 		# TODO
 	else:
-		raise RuntimeError, "unsupported 'path' format: {}".format(v)
+		raise RuntimeError("unsupported 'path' format: {}".format(v))
 	return ret
 
 def _parseColorAndOpacity(color):
@@ -153,7 +154,7 @@ def _parseTransform(transform):
 def _getGradient(v):
 	if v is None:
 		return None
-	from defs import LinearGradient, RadialGradient, Stop
+	from .defs import LinearGradient, RadialGradient, Stop
 	v = v.strip()
 	if not "-" in v:
 		return None
@@ -212,7 +213,7 @@ def _getGradient(v):
 	return ret
 
 def _addArrow(self,o,value,isEnd):
-	from element import Path
+	from .element import Path
 	if not isinstance(o,Path):
 		return
 	values = value.lower().split("-")
@@ -271,14 +272,14 @@ def _addArrow(self,o,value,isEnd):
 		o._markerStart = marker
 
 def _addClipRect(self,o,value):
-	from element import Rect
+	from .element import Rect
 	x,w,y,h = value
 	paper = o.paper
 	clipId = "clip-rect-{}".format(o.id)
 	clip = paper.clipPath(id=clipId)
 	clip.add(paper.rect(x,w,y,h))
 
-class SvgElement:
+class SvgElement(object):
 	def __init__(self,id=None,**kw):
 		self.id = id
 		self.children = []
@@ -340,7 +341,7 @@ class SvgElement:
 				a = _underscoreToMinus(a)
 				return self.attrs.get(a)
 			if isinstance(a,dict):
-				a = dict((_underscoreToMinus(k),v) for k,v in a.iteritems())
+				a = dict((_underscoreToMinus(k),v) for k,v in a.items())
 				return self.attr(**a)
 			raise RuntimeError
 		if len(args)==2 and len(kw)==0:
@@ -348,7 +349,7 @@ class SvgElement:
 			k = _underscoreToMinus(k)
 			return self.attr(**{k:v})
 		if len(args)==0:
-			for k,v in kw.iteritems():
+			for k,v in kw.items():
 				k = _underscoreToMinus(k)
 				self._attr(k,v)
 			return self
@@ -377,7 +378,7 @@ class SvgElement:
 			v = "url(#clip-rect-{})".format(self.id)
 		elif k == "fill":
 			grad = _getGradient(v)
-			if isinstance(v,(str,unicode)) and v.startswith("url("):
+			if isinstance(v,six.string_types) and v.startswith("url("):
 				pass
 			elif grad:
 				i = grad.id = "gradient-obj{}".format(self.id)
@@ -409,7 +410,7 @@ class SvgElement:
 		innerText = self._attrs.get("text","")
 		attrs = {} if self.id == None else dict(id=self.id)
 		attrs.update(self._attrs)
-		attrs = dict((k,"none" if v is None else v) for k,v in attrs.iteritems())
+		attrs = dict((k,"none" if v is None else v) for k,v in attrs.items())
 		ks = sorted(attrs.keys())
 		attrs = [u'{}="{}"'.format(k,attrs[k]) for k in ks]
 		attrs = u" ".join(attrs)

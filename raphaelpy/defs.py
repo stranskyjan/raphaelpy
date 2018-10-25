@@ -1,4 +1,4 @@
-from utils import SvgElement
+from .utils import SvgElement
 
 class Def(SvgElement):
 	def add(self,elem):
