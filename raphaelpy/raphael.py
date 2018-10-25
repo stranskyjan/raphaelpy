@@ -13,63 +13,61 @@ class _Fn(object):
 class _Raphael(object):
 	"""Auxiliary class for initialization :class:`Paper` and custom functions and methods defined in :attr:`el <_Raphael.el>` and :attr:`fn <_Raphael.fn>`.
 	"""
-	el = _El()
-	"""You can add your own method to elements.
-	This is usefull when you want to hack default functionality or want to wrap some common transformation or attributes in one method.
-	You should alter the el object before calling Raphael(...), otherwise it will take no effect.
-
-	Usage:
-
-	.. code-block:: python
-
-		Raphael.el.red = lambda this: this.attr(fill="#f00")
-		# Raphael.el has to be defined before calling Raphael **(!)**
-		paper = Raphael(...)
-		# then use it
-		paper.circle(100, 100, 20).red()
-	"""
-	fn = _Fn()
-	"""You can add your own method to the canvas. For example if you want to draw a pie chart, you can create your own pie chart function and ship it as a Raphael plugin. To do this you need to extend the Raphael.fn object.
-	You should alter the el object before calling Raphael(...), otherwise it will take no effect.
-
-	Usage:
-
-	.. code-block:: python
-
-		Raphael.fn.arrow = lambda this, x1, y1, x2, y2, size: this.path(["M",x1,y1,"L",x2,y2]).attr(stroke_width=size,arrow_end="classic")
-		# Raphael.fn has to be defined before calling Raphael **(!)**
-		paper = Raphael("fn.svg", 640, 480)
-		# then use it
-		paper.arrow(50, 50, 100, 200, 5).attr(fill="#f00")
-	"""
 	def __init__(self):
 		self.el = _El()
+		"""You can add your own method to elements.
+		This is usefull when you want to hack default functionality or want to wrap some common transformation or attributes in one method.
+		You should alter the el object before calling Raphael(...), otherwise it will take no effect.
+		
+		Usage:
+		
+		.. code-block:: python
+		
+			Raphael.el.red = lambda this: this.attr(fill="#f00")
+			# Raphael.el has to be defined before calling Raphael **(!)**
+			paper = Raphael(...)
+			# then use it
+			paper.circle(100, 100, 20).red()
+		"""
 		self.fn = _Fn()
+		"""You can add your own method to the canvas. For example if you want to draw a pie chart, you can create your own pie chart function and ship it as a Raphael plugin. To do this you need to extend the Raphael.fn object.
+		You should alter the el object before calling Raphael(...), otherwise it will take no effect.
+		
+		Usage:
+		
+		.. code-block:: python
+		
+			Raphael.fn.arrow = lambda this, x1, y1, x2, y2, size: this.path(["M",x1,y1,"L",x2,y2]).attr(stroke_width=size,arrow_end="classic")
+			# Raphael.fn has to be defined before calling Raphael **(!)**
+			paper = Raphael("fn.svg", 640, 480)
+			# then use it
+			paper.arrow(50, 50, 100, 200, 5).attr(fill="#f00")
+		"""
 		self._getColorStart = None
 	def __call__(self,fileName,*args,**kw):
 		"""Initializes :attr:`el <_Raphael.el>` and :attr:`fn <_Raphael.fn>` objects and creates :class:`Paper` instance to draw on.
-
+		
 		Parameters might be:
-
+		
 		:param str fileName: file name for saving
 		:param width: width of the canvas
 		:param height: width of the canvas
 		:return: new :class:`Paper` instance
-
+		
 		.. code-block:: python
-
+		
 			paper = Drawing("fname1.svg",640,480)
 			paper = Drawing("fname2.svg",640,480,backgroundColor='cyan')
 			paper = Drawing("fname3.svg",width=640,height=480)
-
+		
 		or
-
+		
 		:param str fileName: file name for saving
 		:param list|tuple attrs: first 4 elements in the list are equal to [x, y, width, height]. The rest are element descriptions in format {"type": type, <attributes>}
 		:return: new :class:`Paper` instance
-
+		
 		.. code-block:: python
-
+		
 			paper = Drawing("fname4.svg",[0,0,640,480,
 				{
 					"type": "path",

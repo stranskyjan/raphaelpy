@@ -9,21 +9,21 @@ class Paper(object):
 	
 	See :meth:`Raphael <_Raphael.__call__>` for possible arguments.
 	
-	forEach is not implemented, use
+	``forEach`` is not implemented, use
 	
 	.. code-block:: python
 	
 		for elem in paper:
-			...
+		   ...
 	
 	instead.
 	"""
-	bottom = None
-	"""Points to the bottom :class:`element <RaphaelElement>` on the paper """
-	top = None
-	"""Points to the topmost :class:`element <RaphaelElement>` on the paper"""
 	def __init__(self,fileName,*args,**kw):
 		self.fileName = fileName
+		#: Points to the bottom :class:`element <RaphaelElement>` on the paper
+		self.bottom = None
+		#: Points to the topmost :class:`element <RaphaelElement>` on the paper
+		self.top = None
 		self._reset()
 		funcs = []
 		if len(args) == 2 and all(isinstance(a,(int,float)) for a in args):
@@ -299,8 +299,8 @@ class Paper(object):
 		
 			st = paper.set()
 			st.push(
-				 paper.circle(10, 10, 5),
-				 paper.circle(30, 10, 5)
+			   paper.circle(10, 10, 5),
+			   paper.circle(30, 10, 5)
 			)
 			st.attr({"fill": "red"})
 		"""
