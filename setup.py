@@ -1,11 +1,29 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from distutils.core import setup
-setup(name='RaphaëlPy',
-	version='1.1',
-	description='Library for creating SVG drawings using Python, inspired by RaphaëlJS<http://dmitrybaranovskiy.github.io/raphael/>',
-	author='Jan Stransky',
-	author_email='honzik.stransky@gmail.com',
-	url='https://github.com/stranskyjan/raphaelpy',
-	packages=['raphaelpy'],
+import setuptools
+from raphaelpy import version
+
+with open('README.md') as f:
+	long_description = f.read()
+
+setuptools.setup(
+	name = 'raphaelpy',
+	version = 'version',
+	description = 'Library for creating SVG drawings using Python, inspired by RaphaëlJS',
+	author = 'Jan Stransky',
+	author_email = 'honzik.stransky@gmail.com',
+	long_description = long_description,
+	long_description_content_type = 'text/markdown',
+	url = 'https://github.com/stranskyjan/raphaelpy',
+	license = "LGPL",
+	keywords = "Python SVG RaphaelJS Raphael",
+	packages = ['raphaelpy'],
+	classifiers = [
+		'Development Status :: 4 - Beta',
+		'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
+		'Programming Language :: Python',
+		'Programming Language :: Python :: 2',
+		'Programming Language :: Python :: 3',
+		'Operating System :: OS Independent',
+	],
 )

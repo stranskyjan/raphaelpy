@@ -11,3 +11,5 @@ from .raphael import _Raphael # for the documentation purposes
 
 null = "none"
 """for more JavaScript consistency"""
+
+version = "0.1.0"
