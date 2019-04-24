@@ -2,7 +2,7 @@
 A library for creating SVG drawings using Python.
 
 ## Overview
-It's usage and most of the public API (and obviously it's name, too) is strongly inspired by [Raphaël JavaScript Library](http://dmitrybaranovskiy.github.io/raphael/).
+Its usage and most of the public API (and obviously its name, too) is strongly inspired by [Raphaël JavaScript Library](http://dmitrybaranovskiy.github.io/raphael/).
 Some examples and some of the implementation details are borrowed from the original project, too.
 
 See [examples](examples) to examine how to it works and how to use it.
@@ -43,7 +43,9 @@ See [examples](examples) directory for more examples.
 
 3. Using [`pip`](https://pypi.org/project/pip/)
 
-	`[sudo] pip install [options] raphaelpy`, e.g. `pip install --user raphaelpy`
+	`[sudo] pip[3] install [options] raphaelpy`, e.g. `pip install --user raphaelpy` or `sudo pip3 install raphaelpy`
+	> Note: use `pip` of Python 2 and `pip3` for Python 3
+	
 
 ## What is here
 
