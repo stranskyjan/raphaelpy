@@ -16,8 +16,8 @@ project = u'RaphaëlPy'
 author = u'Jan Stránský'
 copyright = u'2018, {}'.format(author)
 
-version = '0.1'
-release = '0.1.0'
+version = '0.2'
+release = '0.2.0'
 pygments_style = 'sphinx'
 html_theme = 'classic'
 

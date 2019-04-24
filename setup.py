@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import setuptools
-from raphaelpy import version
+from raphaelpy import __version__ as version
 
 with open('README.md') as f:
 	long_description = f.read()
