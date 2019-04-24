@@ -65,7 +65,7 @@ class TestPaper(unittest.TestCase):
 		olines = [l.rstrip() for l in olines]
 		elines = [
 			'<?xml version="1.0" encoding="utf-8" ?>',
-			'<svg height="480" version="1.1" width="640" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">',
+			'<svg version="1.1" width="640" height="480" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">',
 			'	<defs />',
 			'	<rect fill="white" fill-opacity="1" height="480" id="0" rx="0" ry="0" stroke="none" stroke-opacity="1" stroke-width="1" width="640" x="0" y="0"/>',
 			'	<rect fill="none" height="200" id="1" rx="0" ry="0" stroke="black" stroke-width="1" width="100" x="10" y="20"/>',

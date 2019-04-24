@@ -45,6 +45,8 @@ class Paper(object):
 		self.setSize(w,h)
 		self._processElemsByDescription(funcs)
 		self.backgroundColor = kw.get("backgroundColor","white")
+		self._viewBox = "0 0 {} {}".format(self.width,self.height)
+		self._aspectRatio = None
 	def _processElemsByDescription(self,funcs):
 		for func,kw in funcs:
 			func().attr(**kw)
@@ -77,12 +79,23 @@ class Paper(object):
 			if elem.id == id:
 				return elem
 		return None
-	def setViewBox(self):
-		raise NotImplementedError
+	def setViewBox(self,x=0,y=0,w=1,h=1,fit=False):
+		"""Sets the view box of the paper. Practically it gives you ability to zoom and pan whole paper surface by specifying new boundaries.
+		
+		:param number x: new x position, default is 0
+		:param number y: new y position, default is 0
+		:param number w: new width of the canvas
+		:param number h: new height of the canvas
+		:param bool fit: True if you want graphics to fit into new boundary box
+		"""
+		self._viewBox = "{} {} {} {}".format(x,y,w,h)
+		self._aspectRatio = "xMidYMid meet" if fit else "xMinYMin"
+		return self
 	def _toFileLines(self,indentChar="\t"):
+		aspectRatio = "" if self._aspectRatio is None else ' preserveAspectRatio="{}"'.format(self._aspectRatio)
 		ret = [
 			'<?xml version="1.0" encoding="utf-8" ?>\n',
-			'<svg height="{height}" version="1.1" width="{width}" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">\n'.format(width=self.width,height=self.height),
+			'<svg version="1.1"{aspectRatio} width="{width}" height="{height}" viewBox="{viewBox}" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink">\n'.format(aspectRatio=aspectRatio,width=self.width,height=self.height,viewBox=self._viewBox),
 		]
 		#
 		ks = sorted(self._defs.keys())
@@ -110,7 +123,9 @@ class Paper(object):
 		self._preSave()
 		bg = None
 		if self.backgroundColor:
-			bg = self.rect(0,0,self.width,self.height).attr(stroke=None,fill=self.backgroundColor).toBack()
+			x,y,w,h = [float(w) for w in self._viewBox.split()]
+			x,y,w,h = [int(v) if int(v)==v else v for v in (x,y,w,h)]
+			bg = self.rect(x,y,w,h).attr(stroke=None,fill=self.backgroundColor).toBack()
 			bg.id = 0
 		if not self.fileName:
 			raise RuntimeError
